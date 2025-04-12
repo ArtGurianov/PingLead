@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "rm -rf dist & tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
-    "start": "nodemon dist/index.js",
-    "dev": "concurrently \"-r tsconfig-paths/register\" \"pnpm build:watch\" \"pnpm start\"",
+    "start": "nodemon dist/src/index.js",
+    "dev": "concurrently \"pnpm build:watch\" \"pnpm start\"",
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",
     "db:flush": "prisma db push --force-reset",
@@ -36,9 +36,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "telegraf": "^4.16.3",
     "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
     "uuid": "^11.1.0",
     "zod": "^3.24.2"
   }

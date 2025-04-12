@@ -11,12 +11,12 @@ export const sendData = async (
 ) => {
   const verificationResult = appDataSchema.safeParse(req.body);
   if (verificationResult.error) {
-    const errorMessages = verificationResult.error.errors.map(
-      (each) => each.message
+    const errorStr = verificationResult.error.errors.reduce(
+      (temp, next) =>
+        `${temp} ${next.path.toString().toUpperCase()} - ${next.message};`,
+      ""
     );
-    res
-      .status(400)
-      .send(`Fields verification failed: ${errorMessages.join("; ")}`);
+    res.status(400).send(`Fields verification failed: ${errorStr}`);
     return;
   }
 
