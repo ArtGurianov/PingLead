@@ -6,6 +6,6 @@ export const appDataSchema = z
     title: z.string(),
     app: z.optional(z.string()),
     action: z.optional(z.string()),
-    timestamp: z.optional(z.number()),
+    timestamp: z.optional(z.coerce.number()),
   })
-  .catchall(z.union([z.string(), z.number(), z.boolean()]));
+  .catchall(z.string());
