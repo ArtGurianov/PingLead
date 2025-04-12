@@ -9,7 +9,6 @@ export const sendData = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("HIT");
   const verificationResult = appDataSchema.safeParse(req.body);
   if (verificationResult.error) {
     const errorMessages = verificationResult.error.errors.map(

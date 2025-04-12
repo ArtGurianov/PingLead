@@ -11,15 +11,15 @@ export const getApiKey = async (tgUserId: number) => {
       update: {},
       create: { tgUserId, apiKey: v4() },
     });
+
+    return createAppResponse({
+      success: true,
+      data: user.apiKey,
+    });
   } catch {
     return createAppResponse({
       success: false,
       errorMessage: "An error occured while getting the Api key",
     });
   }
-
-  return createAppResponse({
-    success: true,
-    data: user.apiKey,
-  });
 };
