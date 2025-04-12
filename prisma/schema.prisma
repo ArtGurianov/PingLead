@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Use one by one when prototyping initial database with the command:
+// $npx prisma db push
+// After both steps are done, it doesn't matter which url stays here
+// since they both get overwritten in PrismaClient constructor
+//
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model UserData {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  tgUserId      Int             @unique
+  apiKey        String          @unique
+}

@@ -1,9 +1,17 @@
-import { Telegraf } from "telegraf";
-import "dotenv/config";
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import { webhookRequestHandler } from "./webhookRequestHandler";
+import { APP_PORT, WEBHOOK_PATH } from "./config/tgConfig";
+import { sendData } from "./api/sendData";
 
-const token = process.env.TG_BOT_TOKEN;
-if (!token) throw new Error("Token not provided in env vars");
+const app = express();
 
-const bot = new Telegraf(token);
-bot.start((ctx) => ctx.reply("Welcome to Ping Lead Bot!"));
-bot.launch(() => console.log("Ping Lead Bot is running"));
+app.use(cors());
+app.use(bodyParser.json());
+app.post(WEBHOOK_PATH, webhookRequestHandler);
+app.post("/sendData", sendData);
+
+app.listen(APP_PORT, function () {
+  console.log(`Started on port ${APP_PORT}`);
+});

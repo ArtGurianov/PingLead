@@ -7,19 +7,39 @@
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
     "start": "nodemon dist/index.js",
-    "dev": "concurrently \"pnpm build:watch\" \"pnpm start\""
+    "dev": "concurrently \"-r tsconfig-paths/register\" \"pnpm build:watch\" \"pnpm start\"",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "db:flush": "prisma db push --force-reset",
+    "webhook:register": "ts-node webhookRegister.ts",
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Ping Lead Bot"
+  ],
+  "author": "Art Gurianov",
   "license": "ISC",
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
     "@types/node": "^22.14.0",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
+    "prisma": "^6.6.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "@types/express": "^5.0.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "telegraf": "^4.16.3"
+    "express": "^5.1.0",
+    "telegraf": "^4.16.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
   }
 }

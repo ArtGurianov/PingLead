@@ -1,0 +1,11 @@
+import { z } from "zod";
+
+export const appDataSchema = z
+  .object({
+    apiKey: z.string(),
+    title: z.optional(z.string()),
+    app: z.optional(z.string()),
+    action: z.optional(z.string()),
+    timestamp: z.optional(z.number()),
+  })
+  .catchall(z.union([z.string(), z.number(), z.boolean()]));
