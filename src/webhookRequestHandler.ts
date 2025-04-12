@@ -24,7 +24,7 @@ export const webhookRequestHandler = async (
       return;
     }
 
-    if (text === "/getApiKey") {
+    if (text === "/get_api_key") {
       const { success, data, errorMessage } = await getApiKey(id);
       const qs = new URLSearchParams({
         text: success ? data!.toString() : errorMessage!,
